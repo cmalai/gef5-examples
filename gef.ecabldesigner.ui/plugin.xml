@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="gef.ecabldesigner.ui.editors.ECableDiagramEditor"
+            default="false"
+            extensions="ecd"
+            id="gef.ecabldesigner.ui.ecablediagrameditor"
+            name="ECable Diagram Editor">
+      </editor>
+   </extension>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            id="gef.ecabldesigner.ui"
+            name="ECableDesigner Wizards">
+      </category>
+      <wizard
+            category="gef.ecabldesigner.ui"
+            class="gef.ecabldesigner.ui.wizards.ECableDiagramNewWizard"
+            icon="icons/sample.png"
+            id="gef.ecabldesigner.ui.wizards.ECableDiagramNewWizard"
+            name="ECable Diagram Editor file">
+      </wizard>
+   </extension>
+
+</plugin>

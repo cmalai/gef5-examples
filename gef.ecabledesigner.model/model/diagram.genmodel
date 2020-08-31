@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/gef.ecabledesigner.model/src" modelPluginID="gef.ecabledesigner.model"
+    modelName="Diagram" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>diagram.ecore</foreignModel>
+  <genPackages prefix="Diagram" disposableProviderFactory="true" ecorePackage="diagram.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="diagram.ecore#//ConnectorType">
+      <genEnumLiterals ecoreEnumLiteral="diagram.ecore#//ConnectorType/Undefined"/>
+      <genEnumLiterals ecoreEnumLiteral="diagram.ecore#//ConnectorType/Plug"/>
+      <genEnumLiterals ecoreEnumLiteral="diagram.ecore#//ConnectorType/Receptacle"/>
+      <genEnumLiterals ecoreEnumLiteral="diagram.ecore#//ConnectorType/Symmetric"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="diagram.ecore#//ContactType">
+      <genEnumLiterals ecoreEnumLiteral="diagram.ecore#//ContactType/Undefined"/>
+      <genEnumLiterals ecoreEnumLiteral="diagram.ecore#//ContactType/Pin"/>
+      <genEnumLiterals ecoreEnumLiteral="diagram.ecore#//ContactType/Socket"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="diagram.ecore#//Orientation">
+      <genEnumLiterals ecoreEnumLiteral="diagram.ecore#//Orientation/North"/>
+      <genEnumLiterals ecoreEnumLiteral="diagram.ecore#//Orientation/West"/>
+      <genEnumLiterals ecoreEnumLiteral="diagram.ecore#//Orientation/South"/>
+      <genEnumLiterals ecoreEnumLiteral="diagram.ecore#//Orientation/East"/>
+      <genEnumLiterals ecoreEnumLiteral="diagram.ecore#//Orientation/NorthEast"/>
+      <genEnumLiterals ecoreEnumLiteral="diagram.ecore#//Orientation/NorthWest"/>
+      <genEnumLiterals ecoreEnumLiteral="diagram.ecore#//Orientation/SouthEast"/>
+      <genEnumLiterals ecoreEnumLiteral="diagram.ecore#//Orientation/SouthWest"/>
+      <genEnumLiterals ecoreEnumLiteral="diagram.ecore#//Orientation/Center"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="diagram.ecore#//Color">
+      <genEnumLiterals ecoreEnumLiteral="diagram.ecore#//Color/Red"/>
+      <genEnumLiterals ecoreEnumLiteral="diagram.ecore#//Color/Green"/>
+      <genEnumLiterals ecoreEnumLiteral="diagram.ecore#//Color/Blue"/>
+    </genEnums>
+    <genClasses ecoreClass="diagram.ecore#//CableDiagram">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute diagram.ecore#//CableDiagram/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference diagram.ecore#//CableDiagram/diagramElements"/>
+    </genClasses>
+    <genClasses ecoreClass="diagram.ecore#//AbstractDiagramElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute diagram.ecore#//AbstractDiagramElement/name"/>
+    </genClasses>
+    <genClasses ecoreClass="diagram.ecore#//BlackBoxNode">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference diagram.ecore#//BlackBoxNode/connectors"/>
+    </genClasses>
+    <genClasses ecoreClass="diagram.ecore#//ConnectorNode">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference diagram.ecore#//ConnectorNode/cable"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference diagram.ecore#//ConnectorNode/contacts"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute diagram.ecore#//ConnectorNode/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute diagram.ecore#//ConnectorNode/orientation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute diagram.ecore#//ConnectorNode/collapse"/>
+    </genClasses>
+    <genClasses ecoreClass="diagram.ecore#//ContactNode">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute diagram.ecore#//ContactNode/type"/>
+    </genClasses>
+    <genClasses ecoreClass="diagram.ecore#//Wire">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference diagram.ecore#//Wire/source"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference diagram.ecore#//Wire/target"/>
+    </genClasses>
+    <genClasses ecoreClass="diagram.ecore#//Cable">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference diagram.ecore#//Cable/source"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference diagram.ecore#//Cable/target"/>
+    </genClasses>
+    <genClasses ecoreClass="diagram.ecore#//AbstractNodeElement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference diagram.ecore#//AbstractNodeElement/position"/>
+    </genClasses>
+    <genClasses ecoreClass="diagram.ecore#//Position">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute diagram.ecore#//Position/x"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute diagram.ecore#//Position/y"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute diagram.ecore#//Position/w"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute diagram.ecore#//Position/h"/>
+    </genClasses>
+    <genClasses ecoreClass="diagram.ecore#//JunctionNode"/>
+    <genClasses ecoreClass="diagram.ecore#//Connectable">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference diagram.ecore#//Connectable/wire"/>
+    </genClasses>
+    <genClasses ecoreClass="diagram.ecore#//Edge">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute diagram.ecore#//Edge/color"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute diagram.ecore#//Edge/style"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference diagram.ecore#//Edge/wayPoints"/>
+    </genClasses>
+    <genClasses ecoreClass="diagram.ecore#//Point">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute diagram.ecore#//Point/x"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute diagram.ecore#//Point/y"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

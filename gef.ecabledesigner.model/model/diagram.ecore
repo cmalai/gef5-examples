@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="diagram" nsURI="http://kronotek.com/ecad/diagram" nsPrefix="diagram">
+  <eClassifiers xsi:type="ecore:EClass" name="CableDiagram">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="diagramElements" upperBound="-1"
+        eType="#//AbstractDiagramElement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractDiagramElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BlackBoxNode" eSuperTypes="#//AbstractNodeElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectors" upperBound="-1"
+        eType="#//ConnectorNode" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConnectorNode" eSuperTypes="#//AbstractNodeElement #//Connectable">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cable" eType="#//Cable"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contacts" upperBound="-1"
+        eType="#//ContactNode" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//ConnectorType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="orientation" eType="#//Orientation"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="collapse" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ContactNode" eSuperTypes="#//Connectable #//AbstractNodeElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//ContactType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Wire" eSuperTypes="#//AbstractDiagramElement #//Edge">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//Connectable"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//Connectable"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Cable" eSuperTypes="#//AbstractDiagramElement #//Edge">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//ConnectorNode"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//ConnectorNode"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractNodeElement" eSuperTypes="#//AbstractDiagramElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="position" eType="#//Position"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Position">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="x" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="y" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="w" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="h" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ConnectorType">
+    <eLiterals name="Undefined" value="1" literal="Undefined"/>
+    <eLiterals name="Plug" value="2"/>
+    <eLiterals name="Receptacle" value="3"/>
+    <eLiterals name="Symmetric" value="4" literal="Symmetric"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ContactType">
+    <eLiterals name="Undefined" value="1" literal="Undefined"/>
+    <eLiterals name="Pin" value="5"/>
+    <eLiterals name="Socket" value="6" literal="Socket"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Orientation">
+    <eLiterals name="North" literal="North"/>
+    <eLiterals name="West" value="1"/>
+    <eLiterals name="South" value="2"/>
+    <eLiterals name="East" value="3"/>
+    <eLiterals name="NorthEast" value="4"/>
+    <eLiterals name="NorthWest" value="5"/>
+    <eLiterals name="SouthEast" value="6"/>
+    <eLiterals name="SouthWest" value="7"/>
+    <eLiterals name="Center" value="8"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JunctionNode" eSuperTypes="#//Connectable #//AbstractNodeElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Connectable">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="wire" upperBound="-1" eType="#//Wire"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Color">
+    <eLiterals name="Red"/>
+    <eLiterals name="Green" value="1"/>
+    <eLiterals name="Blue" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Edge">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="color" eType="#//Color"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="style" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="wayPoints" upperBound="-1"
+        eType="#//Point" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Point">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="x" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="y" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+  </eClassifiers>
+</ecore:EPackage>
