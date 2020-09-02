@@ -18,6 +18,7 @@ import com.google.common.collect.SetMultimap;
 
 import diagram.BlackBoxNode;
 import diagram.ConnectorNode;
+import diagram.Orientation;
 import diagram.Position;
 import gef.ecabledesigner.visuals.BlackBoxNodeVisual;
 import javafx.collections.ObservableList;
@@ -39,12 +40,17 @@ public class BlackBoxNodePart extends AbstractContentPart<BlackBoxNodeVisual>
 
 	@Override
 	protected void doAddChildVisual(IVisualPart<? extends Node> child, int index) {
-		getVisual().getChildren().add(child.getVisual());
+
+//		if (getContent().getOrientation().equals(Orientation.EAST)) {
+		getVisual().getRightConnectorHolder().getChildren().add(child.getVisual());
+//		} else {
+//			getVisual().getLeftConnectorHolder().getChildren().add(child.getVisual());
+//		}
 	}
 
 	@Override
 	protected void doRemoveChildVisual(IVisualPart<? extends Node> child, int index) {
-		ObservableList<Node> children = getVisual().getChildren();
+		ObservableList<Node> children = getVisual().getRightConnectorHolder().getChildren();
 		children.remove(index);
 	}
 
@@ -103,7 +109,7 @@ public class BlackBoxNodePart extends AbstractContentPart<BlackBoxNodeVisual>
 
 		BlackBoxNodeVisual blackBoxNodeVisual = new BlackBoxNodeVisual(getContent());
 
-		return blackBoxNodeVisual;
+		return blackBoxNodeVisual.update(getContent());
 	}
 
 	@Override
@@ -115,15 +121,11 @@ public class BlackBoxNodePart extends AbstractContentPart<BlackBoxNodeVisual>
 		visual.getText().setFill(Color.BLACK);
 		visual.getText().setStrokeWidth(2);
 
-		Bounds textBounds = visual.getText().getLayoutBounds();
-
 		Position layout = model.getPosition();
-
-		org.eclipse.gef.geometry.planar.Rectangle bounds = new org.eclipse.gef.geometry.planar.Rectangle(
-				new Point(layout.getX(), layout.getY()), new Dimension(layout.getW(), layout.getH()));
+		
+		visual = visual.update(getContent());
 
 		setVisualSize(new Dimension(layout.getW(), layout.getH()));
-//		setVisualTransform(new Affine());
 
 	}
 

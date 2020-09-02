@@ -30,8 +30,20 @@ public class ConnectorNodePart_Old extends AbstractContentPart<ConnectorNodeVisu
 		@Override
 		public void notifyChanged(Notification notification) {
 
-			refreshVisual();
-			refreshContentChildren();
+			int featureID = notification.getFeatureID(ConnectorNode.class);
+			int eventType = notification.getEventType();
+			switch (featureID) {
+			case Notification.SET:
+
+				refreshVisual();
+				break;
+			case Notification.ADD:
+			case Notification.REMOVE:
+				refreshContentChildren();
+				break;
+			default:
+				break;
+			}
 		}
 	};
 
@@ -56,7 +68,9 @@ public class ConnectorNodePart_Old extends AbstractContentPart<ConnectorNodeVisu
 	@Override
 	protected void doRefreshVisual(ConnectorNodeVisual visual) {
 		visual = visual.update(getContent());
-		setVisualTransform(getContentTransform());
+		if (!(getContent().eContainer() instanceof BlackBoxNode)) {
+			setVisualTransform(getContentTransform());
+		}
 	}
 
 	@Override
@@ -130,22 +144,26 @@ public class ConnectorNodePart_Old extends AbstractContentPart<ConnectorNodeVisu
 //				polygon.setStrokeWidth(2);
 
 		ConnectorNodeVisual connectorNodeVisual = new ConnectorNodeVisual();
-
 		return connectorNodeVisual.update(getContent());
 	}
 
 	@Override
 	public Affine getContentTransform() {
-		Position bounds = getContent().getPosition();
-		return new Affine(new Translate(bounds.getX(), bounds.getY()));
+		if (!(getContent().eContainer() instanceof BlackBoxNode)) {
+			Position bounds = getContent().getPosition();
+			return new Affine(new Translate(bounds.getX(), bounds.getY()));
+		}
+		return null;
 	}
 
 	@Override
 	public void setContentTransform(Affine totalTransform) {
-		Position bounds = getContent().getPosition();
-		bounds.setX(totalTransform.getTx());
-		bounds.setY(totalTransform.getTy());
-		getContent().setPosition(bounds);
+		if (!(getContent().eContainer() instanceof BlackBoxNode)) {
+			Position bounds = getContent().getPosition();
+			bounds.setX(totalTransform.getTx());
+			bounds.setY(totalTransform.getTy());
+			getContent().setPosition(bounds);
+		}
 	}
 
 }
