@@ -34,6 +34,7 @@ import gef.ecabledesigner.parts.ContactNodePart;
 import gef.ecabledesigner.parts.JunctionNodePart;
 import gef.ecabledesigner.parts.ModelPartFactory;
 import gef.ecabledesigner.parts.SimplePortNodeAnchorProvider;
+import gef.ecabledesigner.policies.ConnectorNodeTransformPolicy;
 import gef.ecabledesigner.policies.DeletionPolicyEx;
 
 /**
@@ -127,7 +128,7 @@ public class ECableDesignerModule extends MvcFxModule {
 		adapterMapBinder.addBinding(role).to(ShapeBoundsProvider.class);
 
 		// support moving nodes via mouse drag
-		adapterMapBinder.addBinding(AdapterKey.defaultRole()).to(TransformPolicy.class);
+		adapterMapBinder.addBinding(AdapterKey.defaultRole()).to(ConnectorNodeTransformPolicy.class);
 		adapterMapBinder.addBinding(AdapterKey.defaultRole()).to(TranslateSelectedOnDragHandler.class);
 
 //		// specify the factory to create the geometry object for the selection

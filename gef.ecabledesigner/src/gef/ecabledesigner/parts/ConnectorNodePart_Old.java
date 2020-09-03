@@ -21,6 +21,7 @@ import gef.ecabledesigner.visuals.ConnectorNodeVisual;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.transform.Affine;
+import javafx.scene.transform.Transform;
 import javafx.scene.transform.Translate;
 
 public class ConnectorNodePart_Old extends AbstractContentPart<ConnectorNodeVisual>
@@ -151,7 +152,9 @@ public class ConnectorNodePart_Old extends AbstractContentPart<ConnectorNodeVisu
 	public Affine getContentTransform() {
 		if (!(getContent().eContainer() instanceof BlackBoxNode)) {
 			Position bounds = getContent().getPosition();
-			return new Affine(new Translate(bounds.getX(), bounds.getY()));
+			Affine res = new Affine();
+			res.setToTransform(Transform.translate(bounds.getX(), bounds.getY()));
+			return res;
 		}
 		return null;
 	}
